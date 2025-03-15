@@ -1,17 +1,12 @@
 def house_robber_tab(nums, start, end):
-    if start > end:
-        return 0
-    
-    
-    prev1 = nums[start]
-    prev2 = 0
-    
-    for i in range(start,end+1):
-        pick = nums[i]
-        if i > 1:
-            pick = nums[i] + prev2
-        not_pick = prev1
-        curr = max(pick, not_pick)
+    if start == end:
+            return nums[start]
+        
+    prev2 = nums[start]
+    prev1 = max(nums[start], nums[start + 1]) if start + 1 <= end else nums[start]
+
+    for i in range(start+2,end+1):
+        curr = max(nums[i] + prev2, prev1)
         prev2 = prev1
         prev1 = curr
     return prev1
